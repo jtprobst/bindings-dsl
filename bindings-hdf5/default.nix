@@ -1,7 +1,7 @@
 { compiler ? "ghc864"
 
-, rev    ? "3cd3d1eeb6b26f3acb9e9e16cd7220cd5eb07148"
-, sha256 ? "0671riiyzw2y3vw2apxhnq6vq67py64cqkgwiajfnw5qcrva86pw"
+, rev      ? "89c0e5b332f9aa0f6697bf94dd139d1be9956299"
+, sha256   ? "1k9ir858npyj000qb9s0s3q4vkvvah3n3kn6j8kzd17gj477xmp5"
 
 , pkgs   ?
     import (builtins.fetchTarball {

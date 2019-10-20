@@ -3,7 +3,7 @@
 , doTracing   ? false
 , doStrict    ? false
 , rev         ? "89c0e5b332f9aa0f6697bf94dd139d1be9956299"
-, sha256      ? "fc244db5c3dcfa6643eb04ce8a2827f9b7d6a4554c5297d2f9ecb4d0aaa1f8b5"
+, sha256      ? "1k9ir858npyj000qb9s0s3q4vkvvah3n3kn6j8kzd17gj477xmp5"
 , pkgs        ? import (builtins.fetchTarball {
     url = "https://github.com/NixOS/nixpkgs/archive/${rev}.tar.gz";
     inherit sha256; }) {
