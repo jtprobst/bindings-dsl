@@ -1,29 +1,30 @@
-{ nixpkgs ? import <nixpkgs> {}, compiler ? "default", doBenchmark ? false }:
+{ compiler    ? "ghc822Binary"
+, doBenchmark ? false
+, doTracing   ? false
+, doStrict    ? false
+, rev         ? "89c0e5b332f9aa0f6697bf94dd139d1be9956299"
+, sha256      ? "fc244db5c3dcfa6643eb04ce8a2827f9b7d6a4554c5297d2f9ecb4d0aaa1f8b5"
+, pkgs        ? import (builtins.fetchTarball {
+    url = "https://github.com/NixOS/nixpkgs/archive/${rev}.tar.gz";
+    inherit sha256; }) {
+    config.allowUnfree = true;
+    config.allowBroken = false;
+  }
+, returnShellEnv ? pkgs.lib.inNixShell
+, mkDerivation ? null
+}:
 
-let
+let haskellPackages = pkgs.haskell.packages.${compiler};
 
-  inherit (nixpkgs) pkgs;
+in haskellPackages.developPackage {
+  root = ./.;
 
-  f = { mkDerivation, base, bindings-DSL, gpgme, stdenv }:
-      mkDerivation {
-        pname = "bindings-gpgme";
-        version = "0.1.7";
-        src = ./.;
-        libraryHaskellDepends = [ base bindings-DSL ];
-        librarySystemDepends = [ gpgme ];
-        homepage = "https://github.com/jwiegley/bindings-dsl";
-        description = "Project bindings-* raw interface to gpgme";
-        license = stdenv.lib.licenses.bsd3;
-      };
+  source-overrides = {
+  };
 
-  haskellPackages = if compiler == "default"
-                       then pkgs.haskellPackages
-                       else pkgs.haskell.packages.${compiler};
+  modifier = drv: pkgs.haskell.lib.overrideCabal drv (attrs: {
+    inherit doBenchmark;
+  });
 
-  variant = if doBenchmark then pkgs.haskell.lib.doBenchmark else pkgs.lib.id;
-
-  drv = variant (haskellPackages.callPackage f {});
-
-in
-
-  if pkgs.lib.inNixShell then drv.env else drv
+  inherit returnShellEnv;
+}
