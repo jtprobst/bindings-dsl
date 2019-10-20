@@ -5,11 +5,6 @@ sudo: true
 git:
   depth: 5
 
-install:
-  - git clone --depth=5 https://github.com/$TRAVIS_REPO_SLUG.git bindings-DSL
-  - cd bindings-DSL
-  - git checkout -qf $TRAVIS_COMMIT
-
 env:
   global:
   matrix:
