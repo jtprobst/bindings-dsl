@@ -30,3 +30,4 @@ branches:
   only:
     - master
     - link-with-hdf5
+    - fix-link-with-hdf5
