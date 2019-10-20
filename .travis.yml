@@ -8,9 +8,9 @@ git:
 env:
   global:
   matrix:
-    - GHCVERSION=ghc802
-    - GHCVERSION=ghc822
-    - GHCVERSION=ghc843
+    - GHCVERSION=ghc822Binary
+    - GHCVERSION=ghc844
+    - GHCVERSION=ghc863Binary
 
 matrix:
   allow_failures:
