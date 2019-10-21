@@ -20,8 +20,3 @@ script:
   - nix-build --argstr compiler $GHCVERSION
   - (cd bindings-posix ; nix-build --argstr compiler $GHCVERSION)
   - (cd bindings-gpgme ; nix-build --argstr compiler $GHCVERSION)
-
-branches:
-  only:
-    - master
-    - link-with-hdf5
